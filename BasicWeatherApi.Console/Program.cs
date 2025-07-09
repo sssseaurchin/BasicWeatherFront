@@ -3,13 +3,12 @@ namespace BasicWeatherApi.Console
 {
     class Program
     {
-        static City? SelectCity(List<City> cities)
+        private static City? SelectCity(List<City> cities)
         {
-            for (int i = 0; i < cities.Count; i++)
-                System.Console.WriteLine($"{i}-{cities[i].Name}");
-
+            int paging = 10;
+            PrintCities(cities);
             System.Console.Write("Enter city index:\n>>");
-            int index = int.Parse(System.Console.ReadLine()!);
+            int index = int.Parse(System.Console.ReadLine()!) - 1;
             if (index >= 0 && index < cities.Count)
             {
                 return cities[index];
@@ -17,24 +16,36 @@ namespace BasicWeatherApi.Console
 
             return null;
         }
+
+        private static void PrintCities(List<City> cities)
+        {
+            int pageSize = 10;
+            int total = cities.Count;
+            int index = 0;
+            
+            
+            for (int i = 0; i < pageSize && index < total; i++)
+            {
+                for (int j = 0; j < total; j += pageSize)
+                {
+                    System.Console.Write($"{index+1}-{cities[index].Name} ");
+                    index++;
+                }
+                System.Console.WriteLine();
+            }
+        }
         static async Task Main(string[] args)
         {
-            List<City> cities = new List<City>
-            {
-                new("İzmir", 38.4127, 27.1384),
-                new("İstanbul", 41.0138, 28.9497),
-                new("Ankara", 39.9199, 32.8543),
-                new("Adana", 36.9862, 35.3253),
-                new("Kayseri", 38.7322, 35.4853),
-                new("Eskişehir", 39.7767, 30.5206)
-            };
+            List<City> cities = CityData.GetCityData();
 
             while (true)
             {
+                System.Console.Clear();
                 City city = SelectCity(cities);
                 if (city == null)
                 {
-                    System.Console.WriteLine("Invalid city, restarting...\n");
+                    System.Console.WriteLine("Invalid city, press any key to continue...\n");
+                    System.Console.ReadKey();
                     continue;
                 }
                 List<double> temps = await WeatherService.GetHourlyTemperaturesAsync(city);
@@ -43,7 +54,8 @@ namespace BasicWeatherApi.Console
                 int hour = int.Parse(System.Console.ReadLine()!);
                 if (hour < 0 || hour > 23)
                 {
-                    System.Console.WriteLine("Invalid hour, restarting...\n");
+                    System.Console.WriteLine("Invalid hour, press any key to continue...\n");
+                    System.Console.ReadKey();
                     continue;
                 }
 
