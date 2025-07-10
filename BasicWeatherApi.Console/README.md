@@ -23,6 +23,13 @@ BasicWeatherApi.Console
 ├───WeatherService.cs
 └───WeatherSettings.cs
 ```
+## Compiling
+Run this in the console directory
+```cmd
+dotnet publish -c Release -r win-x64 --self-contained
+```
+The .exe can be located in 
+**BasicWeatherApi\BasicWeatherApi.Console\bin\Release\net8.0\win-x64\BasicWeatherApi.Console.exe**
 
 ## Dependencies
 - .NET 6.0+

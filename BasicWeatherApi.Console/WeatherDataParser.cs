@@ -15,11 +15,11 @@ namespace BasicWeatherApi.Console
                 {
                     result["temperature"] = temp.GetDouble();
                 }
-
+                /*
                 if (current.TryGetProperty("windspeed", out var wind))
                 {
                     result["windspeed"] = wind.GetDouble();
-                }
+                }*/
             }
 
             return result;
@@ -51,25 +51,39 @@ namespace BasicWeatherApi.Console
             return result;
         }
 
-        public static Dictionary<string, double> ParseDailyWeather(string json, WeatherSettings settings)
+        public static Dictionary<string, string> ParseDailyWeather(string json, WeatherSettings settings)
         {
-            var result = new Dictionary<string, double>();
+            var result = new Dictionary<string, string>();
             var document = JsonDocument.Parse(json);
 
-            if (!document.RootElement.TryGetProperty("daily", out JsonElement daily)) return result;
+            if (!document.RootElement.TryGetProperty("daily", out var daily)) return result;
 
+            if (daily.TryGetProperty("sunrise", out var sunrises) && daily.TryGetProperty("sunset", out var sunsets))
+            {
+                if (sunrises.GetArrayLength() > 0 &&  sunsets.GetArrayLength() > 0)
+                {
+                    // change later vvv
+                    var sunriseTime = sunrises[0].GetString()!.Substring(11,5);
+                    var sunsetTime = sunsets[0].GetString()!.Substring(11,5);
+                    // change later ^^^
+                    
+                    result["sunrise"] = sunriseTime ?? "N/A";
+                    result["sunset"] = sunsetTime ?? "N/A";
+                }
+            }
+            
             foreach (var item in settings.Daily)
             {
                 if (item.Value == true) 
                 {
                     string key = item.Key;
 
-                    if (daily.TryGetProperty(key, out JsonElement dataArray))
+                    if (daily.TryGetProperty(key, out var dataArray))
                     {
                         if (dataArray.GetArrayLength() > 0)
                         {
                             double value = dataArray[0].GetDouble();
-                            result[key] = value;
+                            result[key] = value.ToString();
                         }
                     }
                 }

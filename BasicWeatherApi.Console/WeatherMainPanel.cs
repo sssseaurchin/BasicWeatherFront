@@ -22,7 +22,7 @@ namespace BasicWeatherApi.Console
             int pageSize = 10;
             int total = cities.Count;
             int index = 0;
-
+            System.Console.Clear();
 
             for (int i = 0; i < pageSize && index < total; i++)
             {

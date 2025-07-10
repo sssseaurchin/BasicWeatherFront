@@ -5,7 +5,7 @@ namespace BasicWeatherApi.Console
     {
         static async Task Main(string[] args)
         {
-await WeatherMainPanel.Display();
+            await WeatherMainPanel.Display();
         }
     }
 }
