@@ -1,3 +1,1 @@
-> Will be implemented soon.
-
-(Go back)[../]
+> Not implemented yet!
