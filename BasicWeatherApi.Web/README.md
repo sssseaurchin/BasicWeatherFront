@@ -1,3 +1,3 @@
 > Will be implemented soon.
 
-(Go back)[/]
+(Go back)[../]
