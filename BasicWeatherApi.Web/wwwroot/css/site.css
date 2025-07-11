@@ -20,3 +20,123 @@ html {
 body {
   margin-bottom: 60px;
 }
+/*NEW V*/
+.weather-container {
+  width: 600px;
+  margin: 40px auto;
+  padding: 30px;
+  border: 2px solid #000;
+  font-family: sans-serif;
+  text-align: center;
+}
+
+.location {
+  font-size: 1.6em;
+  font-weight: bold;
+}
+
+.coordinates {
+  font-size: 0.9em;
+  color: #999;
+  margin-bottom: 20px;
+}
+
+.current-temp {
+  font-size: 1.8em;
+  margin-bottom: 10px;
+}
+
+.bar-wrapper {
+  border: 2px solid red;
+  margin: 0 auto 10px;
+  width: 300px;
+  height: 30px;
+  position: relative;
+}
+
+.temp-marker {
+  position: absolute;
+  top: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 2px;
+  height: 100%;
+  background: red;
+}
+
+.bar-labels {
+  display: flex;
+  justify-content: space-between;
+  font-size: 0.85em;
+  margin-bottom: 25px;
+}
+
+.data-row {
+  margin-bottom: 12px;
+  font-size: 1.1em;
+}
+
+.sun-bar {
+  margin-top: 20px;
+  position: relative;
+  height: 12px;
+  background: #000;
+  border-radius: 6px;
+}
+
+.sun-marker {
+  width: 24px;
+  height: 24px;
+  background: gold;
+  border-radius: 50%;
+  position: absolute;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: bold;
+}
+
+.sun-times {
+  display: flex;
+  justify-content: space-between;
+  font-size: 0.9em;
+  margin-top: 5px;
+}
+
+.sun-visual {
+  margin-top: 30px;
+  width: 100%;
+  max-width: 500px;
+  height: 16px;
+  border-radius: 10px;
+  background: linear-gradient(to right, navy, deepskyblue, gold, orange, maroon, black, midnightblue);
+  position: relative;
+  margin-inline: auto;
+}
+
+.sun-pointer {
+  position: absolute;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  width: 22px;
+  height: 22px;
+  background: gold;
+  border-radius: 50%;
+  border: 2px solid #fff;
+  box-shadow: 0 0 4px rgba(0,0,0,0.3);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: bold;
+}
+
+.sun-labels {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 10px;
+  padding-inline: 15%;
+  font-size: 0.95em;
+  color: #222;
+}

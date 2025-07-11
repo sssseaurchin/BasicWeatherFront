@@ -1,0 +1,56 @@
+@model BasicWeatherApi.Web.Models.WeatherViewModel
+
+<div class="weather-container">
+    <div class="location">@Model.City.Name</div>
+    <div class="coordinates">@Model.City.Latitude.ToString("0.####") / @Model.City.Longitude.ToString("0.####")</div>
+
+    @if (Model.Weather.temp_2m != null)
+    {
+        <div class="current-temp">@Model.Weather.temp_2m?.ToString("0.#") °C</div>
+        <div class="bar-wrapper">
+            <div class="temp-marker"></div>
+        </div>
+        <div class="bar-labels">
+            <div>&lt;– 6 hours</div>
+            <div>6 hours –&gt;</div>
+        </div>
+    }
+
+    @if (Model.Weather.relative_humidity != null)
+    {
+        <div class="data-row">Humidity: <span>@Model.Weather.relative_humidity%</span></div>
+    }
+
+    @if (Model.Weather.uv != null)
+    {
+        <div class="data-row">UV Index: <span>@Model.Weather.uv?.ToString("0.#")</span></div>
+    }
+
+    @if (Model.Weather.min_temp != null && Model.Weather.max_temp != null)
+    {
+        <div class="data-row">Min / Max: 
+            <span>@Model.Weather.min_temp?.ToString("0.#") / @Model.Weather.max_temp?.ToString("0.#") °C</span>
+        </div>
+    }
+
+    @if (!string.IsNullOrEmpty(Model.Weather.sunrise) && !string.IsNullOrEmpty(Model.Weather.sunset))
+    {
+        
+        var currentHour = DateTime.Now.TimeOfDay.TotalMinutes;
+        var sunriseMinutes = TimeSpan.TryParse(Model.Weather.sunrise, out var srTime) ? srTime.TotalMinutes : 360;
+        var sunsetMinutes = TimeSpan.TryParse(Model.Weather.sunset, out var ssTime) ? ssTime.TotalMinutes : 1080;
+        var totalDaylight = sunsetMinutes - sunriseMinutes;
+        var percent = totalDaylight > 0 ? ((currentHour - sunriseMinutes) / totalDaylight) * 100 : 50;
+        percent = Math.Clamp(percent, 0, 100);
+        
+
+        <div class="sun-visual">
+            <div class="sun-pointer" style="left: @percent%;"></div>
+        </div>
+        <div class="sun-labels">
+            <div>@Model.Weather.sunrise</div>
+            <div>@Model.Weather.sunset</div>
+        </div>
+        <div style="text-align: center; font-size: 0.85em;">@DateTime.Now.TimeOfDay</div>
+    }
+</div>
