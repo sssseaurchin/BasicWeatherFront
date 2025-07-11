@@ -1,9 +1,18 @@
-# Basic Weather Front API
+# BasicWeatherApi Solution
 
 Small project I started to improve my C#.NET skills.
-The application uses a predefined list of cities the user can choose from, requests weather data from [open-meteo](https://open-meteo.com/en/docs) and parses it for the frontend to display it.
+This solution contains two projects for fetching and displaying weather data using [open-meteo](https://open-meteo.com/en/docs):
 
-* [Console Version](BasicWeatherApi.Console/)
-* [Web API Version](BasicWeatherApi.Web/) _-> Not implemented yet!_
+## Projects
 
-This readme will be updated soon with proper information.
+- **[Console Version](BasicWeatherApi.Console/)**
+  A console application that retrieves and prints weather data based on user settings.
+
+- **[Web API Version](BasicWeatherApi.Web/)**
+  A web application with a user interface to fetch and display weather forecasts.
+
+## Setup
+
+```bash
+dotnet run --project BasicWeatherApi.Console
+dotnet run --project BasicWeatherApi.Web

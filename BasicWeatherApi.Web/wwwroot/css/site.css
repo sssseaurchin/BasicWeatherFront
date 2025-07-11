@@ -189,6 +189,17 @@ body {
   cursor: pointer;
   padding: 0;
   outline: none;
+
+  /* Hide scrollbar (cross-browser) */
+  scrollbar-width: none; /* Firefox */
+  -ms-overflow-style: none; /* IE/Edge */
+}
+.location-select::-webkit-scrollbar {
+  display: none; /* Chrome, Safari, Opera */
+}
+.location-select:hover {
+  transition: all 0.1s ease-in-out;
+  outline: grey dotted;
 }
 
 .location-select option {
