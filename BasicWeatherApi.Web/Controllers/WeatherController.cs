@@ -1,3 +1,4 @@
+using BasicWeatherApi.Web.Data;
 using BasicWeatherApi.Web.Models;
 using BasicWeatherApi.Web.Services;
 using Microsoft.AspNetCore.Mvc;
@@ -13,10 +14,27 @@ namespace BasicWeatherApi.Web.Controllers
             _weatherService = weatherService;
         }
 
-        public async Task<IActionResult> Index()
+        [HttpGet]
+        public async Task<IActionResult> Index(int? cityIndex)
         {
-            var data = await _weatherService.GetAllWeatherDataAsync();
+            var cityList = CityData.GetCityData();
+            int index = cityIndex.GetValueOrDefault(0);
+
+            if (index < 0 || index >= cityList.Count)
+                index = 0;
+
+            var data = await _weatherService.GetAllWeatherDataAsync(cityList[index]);
+
+            ViewBag.CityList = cityList;
+            ViewBag.CityIndex = index;
+
             return View(data);
+        }
+
+        [HttpPost]
+        public IActionResult Index(int cityIndex)
+        {
+            return RedirectToAction("Index", new { cityIndex });
         }
         
     }

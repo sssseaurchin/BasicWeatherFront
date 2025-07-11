@@ -6,6 +6,6 @@ namespace BasicWeatherApi.Web.Services
     {
         string GenerateRequestLink(City city, WeatherSettings settings);
         Task<string> FetchWeatherJsonAsync(string url);
-        Task<WeatherViewModel> GetAllWeatherDataAsync();
+        Task<WeatherViewModel> GetAllWeatherDataAsync(City city);
     }
 }

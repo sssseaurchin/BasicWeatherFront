@@ -97,7 +97,7 @@ namespace BasicWeatherApi.Web.Services
             var fullHourly = JsonDocument.Parse(json)
                 .RootElement.GetProperty("hourly");
             
-            if (fullHourly.TryGetProperty("relative_humidity", out var humidityArray))
+            if (fullHourly.TryGetProperty("relative_humidity_2m", out var humidityArray))
             {
                 model.relative_humidity = humidityArray.EnumerateArray()
                     .Select(e => e.GetInt32())

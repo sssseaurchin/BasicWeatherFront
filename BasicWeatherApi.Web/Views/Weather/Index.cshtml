@@ -1,19 +1,53 @@
 @model BasicWeatherApi.Web.Models.WeatherViewModel
 
+@{
+    var cities = ViewBag.CityList as List<BasicWeatherApi.Web.Models.City> ?? new();
+    var selectedIndex = ViewBag.CityIndex is int cityIndex ? cityIndex : 0;
+}
+
+@*<form method="post">
+    <label for="cityIndex">Select City:</label>
+    <select name="cityIndex" id="cityIndex">
+        @for (int i = 0; i < cities.Count; i++)
+        {
+            if (i == selectedIndex)
+            {
+                <option value="@i" selected>@cities[i].Name</option>
+            }
+            else
+            {
+                <option value="@i">@cities[i].Name</option>
+            }
+        }
+    </select>
+    <button type="submit">Submit</button>
+</form>*@
+
 <div class="weather-container">
-    <div class="location">@Model.City.Name</div>
+    @* <div class="location">@Model.City.Name</div> *@
+    <div class="location">
+        <form method="post" style="display: inline;">
+            <select name="cityIndex" class="location-select" onchange="this.form.submit()">
+                @for (int i = 0; i < cities.Count; i++)
+                {
+                    if (i == selectedIndex)
+                    {
+                        <option value="@i" selected>@cities[i].Name</option>
+                    }
+                    else
+                    {
+                        <option value="@i">@cities[i].Name</option>
+                    }
+                }
+            </select>
+        </form>
+    </div>
+
     <div class="coordinates">@Model.City.Latitude.ToString("0.####") / @Model.City.Longitude.ToString("0.####")</div>
     
     @if (Model.Weather.current_temp != null)
     {
         <div class="current-temp">@Model.Weather.current_temp?.ToString("0.#") °C</div>
-        @*<div class="bar-wrapper">
-            <div class="temp-marker"></div>
-        </div>
-        <div class="bar-labels">
-            <div>&lt;– 6 hours</div>
-            <div>6 hours –&gt;</div>
-        </div>*@
     }
     @if (Model.Weather.temp_2m != null)
     {
@@ -49,25 +83,36 @@
             </div>
         </div>
     }
+    
+    @if (Model.Weather.apparent_temp_2m!= null)
+    {
+        <div class="data-row" style="color: dimgray;">Apparent Temperature: <span>@Model.Weather.apparent_temp_2m[DateTime.Now.Hour] °C</span></div>
+    }
 
     @if (Model.Weather.relative_humidity != null)
     {
-        <div class="data-row">Humidity: <span>@Model.Weather.relative_humidity[DateTime.Now.Hour]%</span></div>
-    }
-    @if (Model.Weather.apparent_temp_2m!= null)
-    {
-        <div class="data-row">Apparent Temperature: <span>@Model.Weather.apparent_temp_2m[DateTime.Now.Hour] °C</span></div>
+        <div class="data-row">
+            <img alt="Humidity" src="images/waterdrops.png" style="height: 1.3em; width: 1.3em; vertical-align: middle;">
+            <span>@Model.Weather.relative_humidity[DateTime.Now.Hour]%</span>
+        </div>
     }
 
     @if (Model.Weather.uv != null)
     {
-        <div class="data-row">UV Index: <span>@Model.Weather.uv?.ToString("0.#")</span></div>
+        <div class="data-row">
+            <img alt="UV Index" src="images/uv.png" style="height: 1.3em; width: 1.3em; vertical-align: middle;">
+            <span> @Model.Weather.uv?.ToString("0.#")</span>
+        </div>
     }
 
     @if (Model.Weather.min_temp != null && Model.Weather.max_temp != null)
     {
-        <div class="data-row">Min / Max: 
-            <span>@Model.Weather.min_temp?.ToString("0.#") / @Model.Weather.max_temp?.ToString("0.#") °C</span>
+        <div class="data-row">
+            <span>
+                <span class="min_temp">Min @Model.Weather.min_temp?.ToString("0.#") °C</span>
+                -
+                <span class="max_temp">Max  @Model.Weather.max_temp?.ToString("0.#") °C</span>
+            </span>
         </div>
     }
 

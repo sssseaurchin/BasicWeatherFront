@@ -66,12 +66,12 @@ body {
   background: red;
 }
 
-.bar-labels {
+/*.bar-labels {
   display: flex;
   justify-content: space-between;
   font-size: 0.85em;
   margin-bottom: 25px;
-}
+}*/
 
 .data-row {
   margin-bottom: 12px;
@@ -173,4 +173,30 @@ body {
   text-align: center;
   font-size: 0.9em;
   padding: 4px;
+}
+.location {
+  text-align: center;
+  margin-bottom: 10px;
+}
+.location-select {
+  font-size: 1em;
+  font-weight: bold;
+  text-align: center;
+  border: none;
+  background: transparent;
+  color: inherit;
+  appearance: none;
+  cursor: pointer;
+  padding: 0;
+  outline: none;
+}
+
+.location-select option {
+  font-size: 0.9em;
+}
+.min_temp {
+  color: #445cd1;
+}
+.max_temp {
+  color: #d15044;
 }
