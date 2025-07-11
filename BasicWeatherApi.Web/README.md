@@ -31,19 +31,35 @@ The locally hosted link will be http://localhost:5292 (unless edited on your end
 
 ## Project Structure
 ```
-Copy code
 BasicWeatherApi.Web/
-├── Controllers/
-│   └── WeatherController.cs       # Main controller for weather endpoint
-├── Models/
-│   ├── City.cs                    # Represents city data
-│   └── ErrorViewModel.cs         # Used for error handling views
-├── Data/
-│   └── CityData.cs               # Static data source for cities
-├── Views/                        # Razor views (optional in current version)
-├── wwwroot/                      # Static files (CSS/JS)
-├── appsettings.json              # Configurations
-└── Program.cs                    # Entry point
+│   Program.cs
+│   README.md
+│
+├───Controllers
+│       WeatherController.cs
+├───Data
+│       CityData.cs
+├───Models
+│       City.cs
+│       ErrorViewModel.cs
+│       Weather.cs
+│       WeatherSettings.cs
+│       WeatherViewModel.cs
+├───Properties
+│       launchSettings.json
+├───Services
+│       IWeatherService.cs
+│       WeatherDataParser.cs
+│       WeatherService.cs
+├───Views
+│   │   _ViewImports.cshtml
+│   │   _ViewStart.cshtml
+│   ├───Shared
+│   │       ...
+│   └───Weather
+│           Index.cshtml
+└───wwwroot
+    │   ...
 ``` 
 ### API Reference
 Open-Meteo API docs: https://open-meteo.com/en/docs
