@@ -3,7 +3,11 @@
 BasicWeatherApi.Web is a simple ASP.NET Core Web Application that fetches and displays weather data based on user settings using [open-meteo](https://open-meteo.com/).
 > [!NOTE]
 > Deployed site link will be available after i figure out how to do it...
-![Screenshot of the UI card with Afyonkarahisar and the city's weather data.](/sample.png)
+
+<div align="center">
+  <img width="360" height="335" alt="sample" src="https://github.com/user-attachments/assets/bb442d36-70b9-4515-b616-aeb8c5973278" />
+</div>
+
 ## Features
 
 - Follows the Model-View-Controller architecture.
