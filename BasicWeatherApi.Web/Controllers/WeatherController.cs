@@ -13,11 +13,10 @@ namespace BasicWeatherApi.Web.Controllers
             _weatherService = weatherService;
         }
 
-        public IActionResult Index()
+        public async Task<IActionResult> Index()
         {
-            //yeaa idk
-            // return View(data);
-            return View(_weatherService.GetAllWeatherData());
+            var data = await _weatherService.GetAllWeatherDataAsync();
+            return View(data);
         }
         
     }
